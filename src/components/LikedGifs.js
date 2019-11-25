@@ -12,7 +12,10 @@ function LikedGifs() {
 
   return (
     <div>
-      <button onClick={() => store.dispatch(showWeirdnessScore(true))}>
+      <button
+        disabled={likedGifsArr.likedList.length < 4 ? true : false}
+        onClick={() => store.dispatch(showWeirdnessScore(true))}
+      >
         {' '}
         Show me my weirdness
       </button>
@@ -20,7 +23,7 @@ function LikedGifs() {
         return (
           <div key={i}>
             <img src={e.text} />
-            <button onClick={() => store.dispatch(removeLiked(e.text))}>
+            <button onClick={() => store.dispatch(removeLiked(e))}>
               {' '}
               remove{' '}
             </button>

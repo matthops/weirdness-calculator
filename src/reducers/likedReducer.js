@@ -7,25 +7,26 @@ import {
 
 const initialState = {
   likedList: [],
-  showWeirdness: false
+  showWeirdness: false,
+  scoreSum: 0
 };
 
 const likedReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_LIKED:
-      console.log('ADD_LIKED', state);
       return Object.assign({}, state, {
-        likedList: [...state.likedList, action.gif]
+        likedList: [...state.likedList, action.gif],
+        scoreSum: state.scoreSum + action.gif.score
       });
     case REMOVE_LIKED:
       const newList = state.likedList.filter(item => {
-        return item.text !== action.url;
+        return item.text !== action.url.text;
       });
       return Object.assign({}, state, {
-        likedList: newList
+        likedList: newList,
+        scoreSum: state.scoreSum - action.url.score
       });
     case SHOW_WEIRDNESS_SCORE:
-      console.log(action.bool);
       return Object.assign({}, state, {
         showWeirdness: action.bool
       });

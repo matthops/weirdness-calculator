@@ -4,9 +4,17 @@ import { connect } from 'react-redux';
 import { showWeirdnessScore } from './../actions/actions';
 
 function WeirdnessScore() {
+  const [weirdnessScore, setWeirdnessScore] = useState(
+    () => store.getState().scoreSum
+  );
+  const [totalGifs, setTotalGifs] = useState(
+    () => store.getState().likedList.length
+  );
+
   return (
     <div>
-      WeirdnessScore
+      Average WeirdnessScore
+      {weirdnessScore / totalGifs}
       <button onClick={() => store.dispatch(showWeirdnessScore(false))}>
         Go back{' '}
       </button>
