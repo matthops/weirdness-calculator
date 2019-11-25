@@ -42,6 +42,7 @@ export default function Search() {
         <SearchResult
           // passes url for gif from giphy response object, passes null if search hasn't been performed yet.
           gifSrc={giphyResults ? giphyResults.images.original.url : null}
+          score={weirdness}
         />
       </div>
     </div>

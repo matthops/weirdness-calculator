@@ -14,7 +14,7 @@ function SearchResult(props) {
           <IconButton
             color="default"
             aria-label="Like this gif"
-            onClick={() => store.dispatch(addLiked(props.gifSrc))}
+            onClick={() => store.dispatch(addLiked(props.gifSrc, props.score))}
           >
             <ThumbUpIcon />
           </IconButton>

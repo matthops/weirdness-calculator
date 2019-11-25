@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import store from './../reducers/likedReducer';
+import { connect } from 'react-redux';
+import { removeLiked } from './../actions/actions';
 
-export default function LikedGifs() {
+function LikedGifs() {
   const [reduxState, setReduxState] = useState(() => store.getState());
 
   useEffect(() => {
@@ -13,8 +15,18 @@ export default function LikedGifs() {
     <div>
       LikedGifs
       {reduxState.likedList.map((e, i) => {
-        return <img key={i} src={e} />;
+        return (
+          <div key={i}>
+            <img src={e.text} />
+            <button onClick={() => store.dispatch(removeLiked(e.text))}>
+              {' '}
+              remove{' '}
+            </button>
+          </div>
+        );
       })}
     </div>
   );
 }
+
+export default connect()(LikedGifs);

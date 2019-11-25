@@ -5,19 +5,22 @@ const initialState = {
 };
 
 const ADD_LIKED = 'ADD_LIKED';
-// const REMOVE_LIKED = 'REMOVE_LIKED';
+const REMOVE_LIKED = 'REMOVE_LIKED';
 
 const likedReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_LIKED:
-      console.log(state);
+      console.log('ADD_LIKED', state);
       return Object.assign({}, state, {
-        likedList: [...state.likedList, action.text]
+        likedList: [...state.likedList, action.gif]
       });
-    // case REMOVE_LIKED:
-    //   return Object.assign({}, state, {
-    //     likedList: action.payload.data
-    //   });
+    case REMOVE_LIKED:
+      const newList = state.likedList.filter(item => {
+        return item.text !== action.url;
+      });
+      return Object.assign({}, state, {
+        likedList: newList
+      });
     default:
       return state;
   }
