@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import store from './../reducers/likedReducer';
 import { connect } from 'react-redux';
 import { removeLiked, showWeirdnessScore } from './../actions/actions';
+import { Link } from 'react-router-dom';
 
 function LikedGifs() {
   const [likedGifsArr, setLikedGifsArr] = useState(() => store.getState());
@@ -12,13 +13,15 @@ function LikedGifs() {
 
   return (
     <div>
-      <button
-        disabled={likedGifsArr.likedList.length < 4 ? true : false}
-        onClick={() => store.dispatch(showWeirdnessScore(true))}
-      >
-        {' '}
-        Show me my weirdness
-      </button>
+      <Link to="/results">
+        <button
+          disabled={likedGifsArr.likedList.length < 4 ? true : false}
+          onClick={() => store.dispatch(showWeirdnessScore(true))}
+        >
+          {' '}
+          Show me my weirdness
+        </button>
+      </Link>
       {likedGifsArr.likedList.map((e, i) => {
         return (
           <div key={i}>

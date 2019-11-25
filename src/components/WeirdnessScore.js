@@ -14,7 +14,7 @@ function WeirdnessScore() {
   return (
     <div>
       Average WeirdnessScore
-      {weirdnessScore / totalGifs}
+      {Math.round(weirdnessScore / totalGifs)}
       <button onClick={() => store.dispatch(showWeirdnessScore(false))}>
         Go back{' '}
       </button>

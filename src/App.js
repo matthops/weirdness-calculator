@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Search from './components/Search';
-import LikedGifs from './components/LikedGifs';
-import WeirdnessScore from './components/WeirdnessScore';
 import store from './reducers/likedReducer';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './routes';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
+import Main from './components/Main';
+import WeirdnessScore from './components/WeirdnessScore';
 import './App.css';
 
 function App() {
@@ -21,7 +23,16 @@ function App() {
   return (
     <div className="App">
       <header>Weirdness Calculator</header>
-      <Routes bool={isWeirdnessDisplayed} />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          {isWeirdnessDisplayed ? (
+            <Route path="/results" component={WeirdnessScore} />
+          ) : (
+            <Redirect to="/" />
+          )}
+        </Switch>
+      </Router>
     </div>
   );
 }
