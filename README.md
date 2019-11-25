@@ -1,6 +1,6 @@
 ## Weirdness Calculator
 
-This app is uses the Giphy API to show users several GIFs that range from 0-10 on Giphy’s weirdness scale. Users are asked to enter a search term and the app displays a matching GIF starting on 0 weirdness. Using a slider, users can increase the weirdness and receive weirder and weirder results. When a user finds a GIF they like, they can add it to their list of favorite GIFs by pressing the Like button. Once a user selects their 5 favorite GIFs, they are prompted to see their result telling them how weird they are.
+This app uses the Giphy API to show users several GIFs that range from 0-10 on Giphy’s weirdness scale. Users are asked to enter a search term and the app displays a matching GIF starting on 0 weirdness. Using a slider, users can increase the weirdness and receive weirder and weirder results. When a user finds a GIF they like, they can add it to their list of favorite GIFs by pressing the Like button. Once a user selects their 5 favorite GIFs, they are prompted to see their result telling them how weird they are.
 
 ### Starting the App
 
