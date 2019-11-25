@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SearchResult from './SearchResult';
 import axios from 'axios';
 import Slider from '@material-ui/core/Slider';
+import Button from '@material-ui/core/Button';
 
 export default function Search() {
   const [inputVal, setInputVal] = useState('');
@@ -32,8 +33,11 @@ export default function Search() {
         step={1}
         aria-labelledby="continuous-slider"
       />
-      {weirdness}
-      <button onClick={handleSearch}> Search</button>
+      Weirdness: {weirdness}
+      <Button variant="contained" color="default" onClick={handleSearch}>
+        {' '}
+        Search
+      </Button>
       <div>
         <SearchResult
           // passes url for gif from giphy response object, passes null if search hasn't been performed yet.

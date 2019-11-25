@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './components/Search';
 import LikedGifs from './components/LikedGifs';
+import { connect } from 'react-redux';
 
 import './App.css';
 
@@ -14,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect()(App);
