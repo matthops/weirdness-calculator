@@ -4,6 +4,8 @@ import LikedGifs from './components/LikedGifs';
 import WeirdnessScore from './components/WeirdnessScore';
 import store from './reducers/likedReducer';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './routes';
 
 import './App.css';
 
@@ -19,14 +21,7 @@ function App() {
   return (
     <div className="App">
       <header>Weirdness Calculator</header>
-      {isWeirdnessDisplayed ? (
-        <WeirdnessScore />
-      ) : (
-        <div>
-          <Search />
-          <LikedGifs />
-        </div>
-      )}
+      <Routes bool={isWeirdnessDisplayed} />
     </div>
   );
 }
