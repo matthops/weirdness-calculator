@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import store from './../reducers/likedReducer';
 import { connect } from 'react-redux';
-import { removeLiked } from './../actions/actions';
+import { removeLiked, showWeirdnessScore } from './../actions/actions';
 
 function LikedGifs() {
-  const [reduxState, setReduxState] = useState(() => store.getState());
+  const [likedGifsArr, setLikedGifsArr] = useState(() => store.getState());
 
   useEffect(() => {
-    console.log('useEffect', reduxState);
-    store.subscribe(() => setReduxState(store.getState()));
-  }, [reduxState]);
+    store.subscribe(() => setLikedGifsArr(store.getState()));
+  }, [likedGifsArr]);
 
   return (
     <div>
-      LikedGifs
-      {reduxState.likedList.map((e, i) => {
+      <button onClick={() => store.dispatch(showWeirdnessScore(true))}>
+        {' '}
+        Show me my weirdness
+      </button>
+      {likedGifsArr.likedList.map((e, i) => {
         return (
           <div key={i}>
             <img src={e.text} />

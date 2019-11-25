@@ -1,11 +1,14 @@
 import { createStore } from 'redux';
+import {
+  ADD_LIKED,
+  REMOVE_LIKED,
+  SHOW_WEIRDNESS_SCORE
+} from './../actions/actions';
 
 const initialState = {
-  likedList: []
+  likedList: [],
+  showWeirdness: false
 };
-
-const ADD_LIKED = 'ADD_LIKED';
-const REMOVE_LIKED = 'REMOVE_LIKED';
 
 const likedReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,6 +23,11 @@ const likedReducer = (state = initialState, action) => {
       });
       return Object.assign({}, state, {
         likedList: newList
+      });
+    case SHOW_WEIRDNESS_SCORE:
+      console.log(action.bool);
+      return Object.assign({}, state, {
+        showWeirdness: action.bool
       });
     default:
       return state;
