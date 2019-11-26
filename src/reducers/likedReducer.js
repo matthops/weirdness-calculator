@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   likedList: [],
+  searchTerms: [],
   showWeirdness: false,
   scoreSum: 0
 };
@@ -16,6 +17,7 @@ const likedReducer = (state = initialState, action) => {
     case ADD_LIKED:
       return Object.assign({}, state, {
         likedList: [...state.likedList, action.gif],
+        searchTerms: [...state.searchTerms, action.gif.searchTerm],
         scoreSum: state.scoreSum + action.gif.score
       });
     case REMOVE_LIKED:

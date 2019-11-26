@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IconButton } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { connect } from 'react-redux';
-import { addLiked } from './../actions/actions';
-import store from './../reducers/likedReducer';
+// import { addLiked } from './../actions/actions';
+// import store from './../reducers/likedReducer';
 
 function SearchResult(props) {
   return (
@@ -14,7 +14,7 @@ function SearchResult(props) {
           <IconButton
             color="default"
             aria-label="Like this gif"
-            onClick={() => store.dispatch(addLiked(props.gifSrc, props.score))}
+            onClick={props.addToLikedGifs}
           >
             <ThumbUpIcon />
           </IconButton>
