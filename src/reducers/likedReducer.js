@@ -2,7 +2,8 @@ import { createStore } from 'redux';
 import {
   ADD_LIKED,
   REMOVE_LIKED,
-  SHOW_WEIRDNESS_SCORE
+  SHOW_WEIRDNESS_SCORE,
+  START_OVER
 } from './../actions/actions';
 
 const initialState = {
@@ -29,8 +30,16 @@ const likedReducer = (state = initialState, action) => {
         scoreSum: state.scoreSum - action.url.score
       });
     case SHOW_WEIRDNESS_SCORE:
+      console.log(action.bool);
       return Object.assign({}, state, {
         showWeirdness: action.bool
+      });
+    case START_OVER:
+      return Object.assign({}, state, {
+        likedList: [],
+        searchTerms: [],
+        showWeirdness: false,
+        scoreSum: 0
       });
     default:
       return state;

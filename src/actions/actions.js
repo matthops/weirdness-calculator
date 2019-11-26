@@ -1,6 +1,7 @@
 export const ADD_LIKED = 'ADD_LIKED';
 export const REMOVE_LIKED = 'REMOVE_LIKED';
 export const SHOW_WEIRDNESS_SCORE = 'SHOW_WEIRDNESS_SCORE';
+export const START_OVER = 'START_OVER';
 
 export const addLiked = (text, score, searchTerm) => {
   console.log(text);
@@ -13,4 +14,8 @@ export const removeLiked = url => {
 
 export const showWeirdnessScore = bool => {
   return { type: SHOW_WEIRDNESS_SCORE, bool };
+};
+
+export const startOver = () => {
+  return { type: START_OVER };
 };

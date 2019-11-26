@@ -15,9 +15,12 @@ function App() {
   const [isWeirdnessDisplayed, setIsWeirdnessDisplayed] = useState(false);
 
   useEffect(() => {
+    let isSubscribed = true;
     store.subscribe(() => {
-      setIsWeirdnessDisplayed(store.getState().showWeirdness);
+      if (isSubscribed) setIsWeirdnessDisplayed(store.getState().showWeirdness);
     });
+
+    return () => (isSubscribed = false);
   }, [isWeirdnessDisplayed]);
 
   return (

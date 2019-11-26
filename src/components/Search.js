@@ -13,8 +13,11 @@ export default function Search() {
   const [searchTerms, setSearchTerms] = useState([]);
 
   useEffect(() => {
-    store.subscribe(() => setSearchTerms(store.getState().searchTerms));
-    console.log(searchTerms);
+    const unsubscribe = store.subscribe(() =>
+      setSearchTerms(store.getState().searchTerms)
+    );
+
+    return () => unsubscribe();
   }, [searchTerms]);
 
   // function to retrieve search results from the Giphy API Translate endpoint, with weirdness param included. This will return a single data object.

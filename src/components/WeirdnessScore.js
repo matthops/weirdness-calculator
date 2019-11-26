@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import store from './../reducers/likedReducer';
 import { connect } from 'react-redux';
-import { showWeirdnessScore } from './../actions/actions';
+import { showWeirdnessScore, startOver } from './../actions/actions';
 
 function WeirdnessScore() {
   const [weirdnessScore, setWeirdnessScore] = useState(
@@ -15,7 +15,11 @@ function WeirdnessScore() {
     <div>
       Average WeirdnessScore
       {Math.round(weirdnessScore / totalGifs)}
-      <button onClick={() => store.dispatch(showWeirdnessScore(false))}>
+      <button
+        onClick={() => {
+          store.dispatch(startOver());
+        }}
+      >
         Go back{' '}
       </button>
     </div>

@@ -8,7 +8,11 @@ function LikedGifs() {
   const [likedGifsArr, setLikedGifsArr] = useState(() => store.getState());
 
   useEffect(() => {
-    store.subscribe(() => setLikedGifsArr(store.getState()));
+    const unsubscribe = store.subscribe(() =>
+      setLikedGifsArr(store.getState())
+    );
+
+    return () => unsubscribe();
   }, [likedGifsArr]);
 
   return (
