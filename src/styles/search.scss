@@ -1,11 +1,11 @@
 .search-container {
   width: 50vw;
   height: 100vh;
-  border: 2px solid black;
+  border-right: 1px solid black;
 
   &__top {
     height: 35%;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
   }
 
   &__text {

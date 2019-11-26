@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { IconButton } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { connect } from 'react-redux';
-// import { addLiked } from './../actions/actions';
-// import store from './../reducers/likedReducer';
+import GifBox from './GifBox';
+import './../styles/searchResult.scss';
 
 function SearchResult(props) {
   return (
-    <div>
-      YOUR RESULT
+    <div className="search-result-container">
+      <div className="search-result-container__header">YOUR RESULT</div>
       {props.gifSrc ? (
-        <div>
-          <img src={props.gifSrc} />
+        <div className="inner-search-container">
+          <GifBox url={props.gifSrc} />
           <IconButton
             color="default"
             aria-label="Like this gif"
@@ -20,7 +20,11 @@ function SearchResult(props) {
             <ThumbUpIcon />
           </IconButton>
         </div>
-      ) : null}
+      ) : (
+        <div className="inner-search-container">
+          Look for a gif in the search box above!
+        </div>
+      )}
     </div>
   );
 }

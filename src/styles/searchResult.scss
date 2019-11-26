@@ -1,0 +1,23 @@
+.search-result-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    width: 100%;
+    margin: 3% 4.95% 3% 4.95%;
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
+
+.inner-search-container {
+  display: block;
+  width: 250px;
+  text-align: center;
+  margin: auto;
+  //   height: 100%;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+}

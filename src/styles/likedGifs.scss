@@ -1,0 +1,20 @@
+.liked-gifs-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.liked-gifs-box {
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.inner-gifs-box {
+  width: 220px;
+  margin: 10px 25px 10px 25px;
+}

@@ -22,13 +22,14 @@ export default function Search() {
   }, [searchTerms]);
 
   // function to retrieve search results from the Giphy API Translate endpoint, with weirdness param included. This will return a single data object.
-  const handleSearch = () => {
+  const handleSearch = e => {
+    e.preventDefault();
     let isSearchable = true;
     let usedTerm;
-
     // checking to see if search term is a duplicate
     searchTerms.forEach(term => {
       if (term.toLowerCase() === inputVal.toLowerCase()) {
+        console.log('hit the if');
         usedTerm = term;
         setInputVal('');
         setGiphyResults(null);
@@ -39,11 +40,16 @@ export default function Search() {
     isSearchable
       ? axios
           .get(
-            `https://api.giphy.com/v1/gifs/translate?api_key=mE4m0eTkyT9EpOLroGJG2idYH7QUTPpp&weirdness=${weirdness}&s=${inputVal}`
+            `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&weirdness=${weirdness}&s=${inputVal}`
           )
-          .then(e => setGiphyResults(e.data.data))
+          .then(e => {
+            setGiphyResults(e.data.data);
+          })
+          .catch(err => {
+            console.log(err.message);
+          })
       : alert(
-          `You've alread looked for ${usedTerm}, pleas select another term and hit search`
+          `You've already looked for ${usedTerm}, please select another term and hit search`
         );
   };
 
@@ -70,8 +76,7 @@ export default function Search() {
             GIFs, we'll show you how weird you are.
           </p>
         </div>
-
-        <form className="search-form">
+        <form className="search-form" onSubmit={e => handleSearch(e)}>
           <div>
             <InputLabel id="search-term__label" htmlFor="search-term">
               Search Term
@@ -85,7 +90,11 @@ export default function Search() {
               id="search-term"
             />
           </div>
-          <button onClick={handleSearch} id="search-button">
+          <button
+            type="button"
+            id="search-button"
+            onClick={e => handleSearch(e)}
+          >
             <Typography> Search</Typography>
           </button>
         </form>
