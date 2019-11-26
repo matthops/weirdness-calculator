@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 function SearchResult(props) {
   return (
     <div>
+      YOUR RESULT
       {props.gifSrc ? (
         <div>
           <img src={props.gifSrc} />

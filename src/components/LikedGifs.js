@@ -17,15 +17,7 @@ function LikedGifs() {
 
   return (
     <div>
-      <Link to="/results">
-        <button
-          disabled={likedGifsArr.likedList.length < 4 ? true : false}
-          onClick={() => store.dispatch(showWeirdnessScore(true))}
-        >
-          {' '}
-          Show me my weirdness
-        </button>
-      </Link>
+      YOUR LIKED GIFS
       {likedGifsArr.likedList.map((e, i) => {
         return (
           <div key={i}>
@@ -37,6 +29,15 @@ function LikedGifs() {
           </div>
         );
       })}
+      <Link to="/results">
+        <button
+          disabled={likedGifsArr.likedList.length < 4 ? true : false}
+          onClick={() => store.dispatch(showWeirdnessScore(true))}
+        >
+          {' '}
+          CALCULATE MY WEIRDNESS SCORE
+        </button>
+      </Link>
     </div>
   );
 }

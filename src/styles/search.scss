@@ -1,0 +1,39 @@
+.search-container {
+  width: 50vw;
+  height: 100vh;
+  border: 2px solid black;
+
+  &__top {
+    height: 35%;
+    border-bottom: 2px solid black;
+  }
+
+  &__text {
+    padding: 4.95%;
+    text-align: left;
+  }
+}
+
+.weirdness-slider {
+  margin: 3% 10% 3% 10%;
+}
+
+#search-term {
+  padding: 10px;
+
+  &__label {
+  }
+}
+
+.search-form {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 4.95%;
+}
+
+#search-button {
+  padding: 0 30px 0 30px;
+  margin-top: 1rem;
+  max-height: 40px;
+  background: darkgrey;
+}

@@ -20,7 +20,7 @@ function WeirdnessScore() {
           store.dispatch(startOver());
         }}
       >
-        Go back{' '}
+        Start Over{' '}
       </button>
     </div>
   );

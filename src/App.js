@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import Main from './components/Main';
 import WeirdnessScore from './components/WeirdnessScore';
-import './App.css';
+import './styles/app.scss';
 
 function App() {
   const [isWeirdnessDisplayed, setIsWeirdnessDisplayed] = useState(false);
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <header>Weirdness Calculator</header>
+      <header className="App-header">Weirdness Calculator</header>
       <Router>
         <Switch>
           <Route exact path="/" component={Main} />
