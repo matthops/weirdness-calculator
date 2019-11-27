@@ -8,8 +8,8 @@ export const addLiked = (gifObj, score, searchTerm) => {
   return { type: ADD_LIKED, gif: { gifObj, score, searchTerm } };
 };
 
-export const removeLiked = url => {
-  return { type: REMOVE_LIKED, url };
+export const removeLiked = id => {
+  return { type: REMOVE_LIKED, id };
 };
 
 export const showWeirdnessScore = bool => {

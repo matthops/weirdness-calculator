@@ -3,6 +3,7 @@ import store from './../reducers/likedReducer';
 import { connect } from 'react-redux';
 import { startOver } from './../actions/actions';
 import GifBox from './GifBox';
+import { Typography } from '@material-ui/core';
 import './../styles/weirdnessScore.scss';
 
 function WeirdnessScore() {
@@ -17,7 +18,11 @@ function WeirdnessScore() {
     <div className="weirdness-score-container">
       <div className="weirdness-score-container__headline">
         {`You scored
-        ${Math.round(weirdnessScore / totalGifs.length)}/10 on the weirdness
+        ${
+          weirdnessScore > 0
+            ? Math.round(weirdnessScore / totalGifs.length)
+            : weirdnessScore
+        }/10 on the weirdness
         scale!`}
       </div>
       <div className="weirdness-gif-container">
@@ -35,11 +40,12 @@ function WeirdnessScore() {
       </div>
       <div className="weirdness-button-section">
         <button
+          id="weirdness-button-start-over"
           onClick={() => {
             store.dispatch(startOver());
           }}
         >
-          Start Over{' '}
+          <Typography variant="button"> START OVER</Typography>
         </button>
       </div>
     </div>

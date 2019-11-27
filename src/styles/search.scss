@@ -1,6 +1,6 @@
 .search-container {
   width: 56%;
-  height: 100vh;
+  height: 88vh;
   border-right: 1px solid black;
 
   &__top {
@@ -9,14 +9,8 @@
   }
 
   &__text {
-    padding-left: 4.95%;
-    padding-top: 2%;
-    padding: 2% 2% 2% 4.95%;
+    padding: 4% 4.95% 4% 4.95%;
     text-align: left;
-
-    p {
-      font-size: 20px;
-    }
   }
 }
 
@@ -41,5 +35,6 @@
   padding: 0 30px 0 30px;
   margin-top: 1rem;
   max-height: 40px;
-  background: darkgrey;
+  background: rgb(117, 114, 114);
+  color: white;
 }

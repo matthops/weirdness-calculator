@@ -15,8 +15,40 @@
     object-fit: cover;
     border-radius: 5px;
   }
+
+  .remove-gif {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    border-radius: 100%;
+    border: none;
+    background-color: black;
+    opacity: 0;
+    transition: 0.25s;
+    color: white;
+    margin-right: 4px;
+    margin-top: 4px;
+    padding: 0 0 2px !important;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  &:hover {
+    .remove-gif {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
 }
 
 .gif-title {
-  font-size: 12px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-bottom: 12px;
+  text-align: center;
+  font-weight: 600;
 }

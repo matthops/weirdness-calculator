@@ -25,7 +25,10 @@ function SearchResult(props) {
         <div className="inner-search-container empty">
           <div className="aspect-ratio">
             <div className="aspect-ratio__inside">
-              Look for a gif in the search box above!
+              {props.errorMessage === null
+                ? `To look for a gif, enter a term in the search box above, and set the weirdness
+              below.`
+                : props.errorMessage}
             </div>
           </div>
         </div>

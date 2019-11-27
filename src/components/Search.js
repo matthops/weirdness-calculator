@@ -5,6 +5,7 @@ import Slider from '@material-ui/core/Slider';
 import store from './../reducers/likedReducer';
 import { addLiked } from './../actions/actions';
 import { Typography, InputLabel, TextField } from '@material-ui/core';
+import Loading from './Loading';
 import './../styles/search.scss';
 
 export default function Search() {
@@ -12,6 +13,8 @@ export default function Search() {
   const [giphyResult, setGiphyResult] = useState(null);
   const [weirdness, setWeirdness] = useState(0);
   const [searchTerms, setSearchTerms] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const unsubscribe = store.subscribe(() =>
@@ -24,8 +27,10 @@ export default function Search() {
   // function to retrieve search results from the Giphy API Translate endpoint, with weirdness param included. This will return a single data object.
   const handleSearch = e => {
     e.preventDefault();
+    debugger;
     let isSearchable = true;
     let usedTerm;
+    setErrorMessage(null);
     // checking to see if search term is a duplicate
     searchTerms.forEach(term => {
       if (term.toLowerCase() === inputVal.toLowerCase()) {
@@ -43,12 +48,19 @@ export default function Search() {
             `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&weirdness=${weirdness}&s=${inputVal}`
           )
           .then(e => {
-            setGiphyResult(e.data.data);
+            return e.data.data.id
+              ? setGiphyResult(e.data.data) && setIsLoading(true)
+              : setErrorMessage(
+                  `There are no results for this term. Please enter a new term and hit search`
+                );
           })
           .catch(err => {
-            console.log(err.message);
+            console.log(err.message, giphyResult);
+            setErrorMessage(
+              `We've hit an error! Please enter a new term and hit search`
+            );
           })
-      : alert(
+      : setErrorMessage(
           `You've already looked for ${usedTerm}, please select another term and hit search`
         );
   };
@@ -63,16 +75,17 @@ export default function Search() {
     <div className="search-container">
       <div className="search-container__top">
         <div className="search-container__text">
-          <p>
+          <Typography>
             {' '}
             Find out how wierd you are by selecting the GIFs that make you
             laugh. We'll show you the least weird ones to start, but you can
             move the slider to make them weirder.{' '}
-          </p>
-          <p>
+          </Typography>
+          <br />
+          <Typography>
             When you find a GIF you like, press the Like button. Once you like 5
             GIFs, we'll show you how weird you are.
-          </p>
+          </Typography>
         </div>
         <form className="search-form" onSubmit={e => handleSearch(e)}>
           <div>
@@ -88,22 +101,24 @@ export default function Search() {
               id="search-term"
             />
           </div>
-          <button
-            type="button"
-            id="search-button"
-            onClick={e => handleSearch(e)}
-          >
-            <Typography> Search</Typography>
+          <button id="search-button" onClick={e => handleSearch(e)}>
+            <Typography variant="button"> Search</Typography>
           </button>
         </form>
       </div>
       <div>
-        <SearchResult
-          // passes url for gif from giphy response object, passes null if search hasn't been performed yet.
-          gifSrc={giphyResult ? giphyResult.images.original.url : null}
-          title={giphyResult ? giphyResult.title : null}
-          addToLikedGifs={handleAddToLikedGifs}
-        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <SearchResult
+            // passes url for gif from giphy response object, passes null if search hasn't been performed yet.
+            gifSrc={giphyResult ? giphyResult.images.original.url : null}
+            title={giphyResult ? giphyResult.title : null}
+            addToLikedGifs={handleAddToLikedGifs}
+            errorMessage={errorMessage}
+          />
+        )}
+
         <div className="weirdness-slider">
           <Slider
             value={weirdness}

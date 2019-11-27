@@ -23,11 +23,11 @@ const likedReducer = (state = initialState, action) => {
       });
     case REMOVE_LIKED:
       const newList = state.likedList.filter(item => {
-        return item.text !== action.url.text;
+        return item.gifObj.id !== action.id;
       });
       return Object.assign({}, state, {
         likedList: newList,
-        scoreSum: state.scoreSum - action.url.score
+        scoreSum: state.scoreSum - action.id.score
       });
     case SHOW_WEIRDNESS_SCORE:
       console.log(action.bool);

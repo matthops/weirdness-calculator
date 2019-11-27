@@ -3,6 +3,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &__headline {
+    width: 90%;
+    padding-top: 40px;
+    font-weight: 600;
+    font-size: 20px;
+  }
 }
 
 .liked-gifs-box {
@@ -11,10 +18,23 @@
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 30px;
+  margin: 30px 60px 30px 60px;
 }
 
 .inner-gifs-box {
-  width: 220px;
-  margin: 10px 25px 10px 25px;
+  width: 200px;
+  margin: 10px;
+}
+
+.show-weirdness-button {
+  padding: 4px 20px 2px 20px;
+  height: 40px;
+  background: rgb(117, 114, 114);
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 30px;
+
+  &:disabled {
+    background: rgb(201, 198, 198);
+  }
 }

@@ -7,6 +7,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 import Main from './components/Main';
 import WeirdnessScore from './components/WeirdnessScore';
 import './styles/app.scss';
@@ -25,7 +26,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">Weirdness Calculator</header>
+      <header className="App-header">
+        <Typography variant="h4"> Weirdness Calculator</Typography>
+      </header>
       <Router>
         <Switch>
           <Route exact path="/" component={Main} />

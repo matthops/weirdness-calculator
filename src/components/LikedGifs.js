@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { removeLiked, showWeirdnessScore } from './../actions/actions';
 import { Link } from 'react-router-dom';
 import GifBox from './GifBox';
+import { Typography } from '@material-ui/core';
 import './../styles/likedGifs.scss';
 
 function LikedGifs() {
@@ -23,7 +24,7 @@ function LikedGifs() {
 
   return (
     <div className="liked-gifs-container">
-      YOUR LIKED GIFS
+      <div className="liked-gifs-container__headline">YOUR LIKED GIFS</div>
       <div className="liked-gifs-box">
         {likedGifsArr.likedList.map((e, i) => {
           if (i <= 3) {
@@ -32,12 +33,8 @@ function LikedGifs() {
                 <GifBox
                   url={e.gifObj.images.original.url}
                   title={e.gifObj.title}
+                  removeLiked={() => store.dispatch(removeLiked(e.gifObj.id))}
                 />
-
-                <button onClick={() => store.dispatch(removeLiked(e))}>
-                  {' '}
-                  remove{' '}
-                </button>
               </div>
             );
           }
@@ -46,14 +43,23 @@ function LikedGifs() {
       <div>
         <Link to="/results">
           <button
+            className="show-weirdness-button"
             disabled={likedGifsArr.likedList.length < 5 ? true : false}
-            onClick={() => store.dispatch(showWeirdnessScore(true))}
+            onClick={() => {
+              store.dispatch(showWeirdnessScore(true));
+            }}
           >
             {' '}
-            CALCULATE MY WEIRDNESS SCORE
+            <Typography> CALCULATE MY WEIRDNESS SCORE</Typography>
           </button>
         </Link>
-        <div>{`You must like ${countdown} more GIFs to calculate your score`}</div>
+        <div>
+          {`You must `}
+          <em>Like</em>
+          {` ${countdown >= 0 ? countdown : 0} more GIF${
+            countdown === 1 ? '' : 's'
+          } to calculate your score`}
+        </div>
       </div>
     </div>
   );
