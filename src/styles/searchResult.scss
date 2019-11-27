@@ -13,11 +13,16 @@
 
 .inner-search-container {
   display: block;
-  width: 250px;
+  width: 225px;
   text-align: center;
   margin: auto;
+
   //   height: 100%;
   //   display: flex;
   //   justify-content: center;
   //   align-items: center;
+}
+
+.empty {
+  padding: 24px;
 }

@@ -1,0 +1,20 @@
+.weirdness-score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__headline {
+    font-size: 35px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.weirdness-gif-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.weirdness-button-section {
+  padding-top: 100px;
+}

@@ -9,7 +9,7 @@ import './../styles/search.scss';
 
 export default function Search() {
   const [inputVal, setInputVal] = useState('');
-  const [giphyResults, setGiphyResults] = useState(null);
+  const [giphyResult, setGiphyResult] = useState(null);
   const [weirdness, setWeirdness] = useState(0);
   const [searchTerms, setSearchTerms] = useState([]);
 
@@ -32,7 +32,7 @@ export default function Search() {
         console.log('hit the if');
         usedTerm = term;
         setInputVal('');
-        setGiphyResults(null);
+        setGiphyResult(null);
         isSearchable = false;
       }
     });
@@ -43,7 +43,7 @@ export default function Search() {
             `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&weirdness=${weirdness}&s=${inputVal}`
           )
           .then(e => {
-            setGiphyResults(e.data.data);
+            setGiphyResult(e.data.data);
           })
           .catch(err => {
             console.log(err.message);
@@ -54,11 +54,9 @@ export default function Search() {
   };
 
   const handleAddToLikedGifs = () => {
-    store.dispatch(
-      addLiked(giphyResults.images.original.url, weirdness, inputVal)
-    );
+    store.dispatch(addLiked(giphyResult, weirdness, inputVal));
     setInputVal('');
-    setGiphyResults(null);
+    setGiphyResult(null);
   };
 
   return (
@@ -102,7 +100,8 @@ export default function Search() {
       <div>
         <SearchResult
           // passes url for gif from giphy response object, passes null if search hasn't been performed yet.
-          gifSrc={giphyResults ? giphyResults.images.original.url : null}
+          gifSrc={giphyResult ? giphyResult.images.original.url : null}
+          title={giphyResult ? giphyResult.title : null}
           addToLikedGifs={handleAddToLikedGifs}
         />
         <div className="weirdness-slider">

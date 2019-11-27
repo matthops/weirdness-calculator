@@ -1,5 +1,5 @@
 .search-container {
-  width: 50vw;
+  width: 56%;
   height: 100vh;
   border-right: 1px solid black;
 
@@ -9,13 +9,19 @@
   }
 
   &__text {
-    padding: 4.95%;
+    padding-left: 4.95%;
+    padding-top: 2%;
+    padding: 2% 2% 2% 4.95%;
     text-align: left;
+
+    p {
+      font-size: 20px;
+    }
   }
 }
 
 .weirdness-slider {
-  margin: 3% 10% 3% 10%;
+  margin: 1% 10% 3% 10%;
 }
 
 #search-term {
