@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { connect } from 'react-redux';
 import GifBox from './GifBox';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import './../styles/searchResult.scss';
 
 function SearchResult(props) {
@@ -28,12 +29,14 @@ function SearchResult(props) {
           <div className="aspect-ratio">
             <div className="aspect-ratio__inside">
               {//Ternary to determine if error message or Loading... should be displayed
-              props.errorMessage !== null
-                ? props.errorMessage
-                : props.isLoading === true
-                ? 'Loading...'
-                : `To look for a gif, enter a term in the search box above, and set the weirdness
-              below.`}
+              props.errorMessage !== null ? (
+                props.errorMessage
+              ) : props.isLoading === true ? (
+                <CircularProgress />
+              ) : (
+                `To look for a gif, enter a term in the search box above, then set the weirdness
+              below.`
+              )}
             </div>
           </div>
         </div>

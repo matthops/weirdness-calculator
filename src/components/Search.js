@@ -12,8 +12,6 @@ export default function Search() {
   const [giphyResult, setGiphyResult] = useState(null);
   //weirdness is set by the slider
   const [weirdness, setWeirdness] = useState(0);
-  //searchedWeirdness is the weirdness score that was used in the Giphy API search and needs to be separate so the score that is submitted when a gif is liked is accurate, since the user can change the weirdness score for additional searches
-  const [searchedWeirdness, setSearchedWeirdness] = useState(0);
   const [searchTerms, setSearchTerms] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +35,6 @@ export default function Search() {
     //In case there was an error message in state, removes error message
     setErrorMessage(null);
     //Sets the weirdness score at the time of the search for the weirdness score sum
-    setSearchedWeirdness(weirdness);
     let usedTerm;
 
     // checking to see if search term is a duplicate
@@ -61,10 +58,10 @@ export default function Search() {
     isSearchable
       ? axios
           .get(
-            `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&weirdness=${weirdness}&s=${inputVal.replace(
+            `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&s=${inputVal.replace(
               ' ',
               '+'
-            )}`
+            )}&weirdness=${weirdness}`
           )
           .then(e => {
             return e.data.data.id
@@ -85,9 +82,10 @@ export default function Search() {
 
   //function to update redux with relevant information to display gif in other components and reset searchresult info
   const handleAddToLikedGifs = () => {
-    store.dispatch(addLiked(giphyResult, searchedWeirdness, inputVal));
+    store.dispatch(addLiked(giphyResult, weirdness, inputVal));
     setInputVal('');
     setGiphyResult(null);
+    setWeirdness(0);
   };
 
   //main component return
@@ -138,6 +136,7 @@ export default function Search() {
           <Slider
             value={weirdness}
             onChange={(event, newValue) => setWeirdness(newValue)}
+            onChangeCommitted={(event, newValue) => handleSearch(event)}
             min={0}
             max={10}
             step={1}
