@@ -11,7 +11,7 @@ export default function GifBox(props) {
       <div className="aspect-ratio">
         <img
           src={props.url}
-          alt="placeholder"
+          alt={props.title}
           className="aspect-ratio__inside"
         />
         {//Ternary to determine if remove button should be displayed on hover

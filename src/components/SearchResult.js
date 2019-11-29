@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { connect } from 'react-redux';
 import GifBox from './GifBox';
@@ -14,13 +14,14 @@ function SearchResult(props) {
         <div className="inner-search-container">
           <GifBox url={props.gifSrc} title={props.title} />
 
-          <IconButton
+          <Button
             color="default"
             aria-label="Like this gif"
             onClick={props.addToLikedGifs}
+            className="like-button"
           >
             <ThumbUpIcon />
-          </IconButton>
+          </Button>
         </div>
       ) : (
         <div className="inner-search-container empty">

@@ -29,17 +29,15 @@ function LikedGifs() {
       <div className="liked-gifs-box">
         {likedGifsArr.likedList.map((e, i) => {
           //conditional to limit the number of liked gifs displayed to four
-          if (i <= 3) {
-            return (
-              <div key={i} className="inner-gifs-box">
-                <GifBox
-                  url={e.gifObj.images.original.url}
-                  title={e.gifObj.title}
-                  removeLiked={() => store.dispatch(removeLiked(e.gifObj.id))}
-                />
-              </div>
-            );
-          }
+          return i <= 3 ? (
+            <div key={i} className="inner-gifs-box">
+              <GifBox
+                url={e.gifObj.images.original.url}
+                title={e.gifObj.title}
+                removeLiked={() => store.dispatch(removeLiked(e.gifObj.id))}
+              />
+            </div>
+          ) : null;
         })}
       </div>
       <div>
