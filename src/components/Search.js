@@ -18,11 +18,11 @@ export default function Search() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  //Redux for tracking search terms to prevent repeat term searches
   useEffect(() => {
     const unsubscribe = store.subscribe(() =>
       setSearchTerms(store.getState().searchTerms)
     );
-
     return () => unsubscribe();
   }, [searchTerms]);
 
@@ -30,27 +30,34 @@ export default function Search() {
   const handleSearch = e => {
     e.preventDefault();
     let isSearchable = true;
-    let usedTerm;
+    //clear out current giphyResult
     setGiphyResult(null);
+    //Trigger loading indicator
     setIsLoading(true);
+    //In case there was an error message in state, removes error message
     setErrorMessage(null);
+    //Sets the weirdness score at the time of the search for the weirdness score sum
     setSearchedWeirdness(weirdness);
+    let usedTerm;
+
     // checking to see if search term is a duplicate
     searchTerms.forEach(term => {
+      //Conditional to check if any search terms match current input
       if (term.toLowerCase() === inputVal.toLowerCase()) {
-        console.log('hit the if');
         usedTerm = term;
         setInputVal('');
         setGiphyResult(null);
+        //flag to prevent axios search and set error message if conditions are met
         isSearchable = false;
       }
     });
 
+    //function to reset loading flag state and update giphy result
     const updateSearchResult = e => {
       setIsLoading(false);
       setGiphyResult(e.data.data);
     };
-
+    //Ternary to prevent giphy call if search term matches a previously searched string, if there are no conflicts, an axios call to the Giphy API is triggered.
     isSearchable
       ? axios
           .get(
@@ -60,7 +67,6 @@ export default function Search() {
             )}`
           )
           .then(e => {
-            debugger;
             return e.data.data.id
               ? updateSearchResult(e)
               : setErrorMessage(
@@ -68,7 +74,6 @@ export default function Search() {
                 );
           })
           .catch(err => {
-            console.log(err.message, giphyResult);
             setErrorMessage(
               `We've hit an error! Please enter a new term and hit search`
             );
@@ -78,12 +83,14 @@ export default function Search() {
         );
   };
 
+  //function to update redux with relevant information to display gif in other components and reset searchresult info
   const handleAddToLikedGifs = () => {
     store.dispatch(addLiked(giphyResult, searchedWeirdness, inputVal));
     setInputVal('');
     setGiphyResult(null);
   };
 
+  //main component return
   return (
     <div className="search-container">
       <div className="search-container__top">
@@ -107,7 +114,6 @@ export default function Search() {
             </InputLabel>
             <TextField
               type="search"
-              pattern="[A-Za-z0-9]+"
               value={inputVal}
               onChange={e => setInputVal(e.target.value)}
               variant="outlined"

@@ -3,14 +3,14 @@ import { IconButton } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { connect } from 'react-redux';
 import GifBox from './GifBox';
-import Loading from './Loading';
 import './../styles/searchResult.scss';
 
 function SearchResult(props) {
   return (
     <div className="search-result-container">
       <div className="search-result-container__header">YOUR RESULT</div>
-      {props.gifSrc ? (
+      {//ternary to determine whether or not a gif or error/informational text needs to be displayed to the user
+      props.gifSrc ? (
         <div className="inner-search-container">
           <GifBox url={props.gifSrc} title={props.title} />
 
@@ -26,7 +26,8 @@ function SearchResult(props) {
         <div className="inner-search-container empty">
           <div className="aspect-ratio">
             <div className="aspect-ratio__inside">
-              {props.errorMessage !== null
+              {//Ternary to determine if error message or Loading... should be displayed
+              props.errorMessage !== null
                 ? props.errorMessage
                 : props.isLoading === true
                 ? 'Loading...'

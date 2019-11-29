@@ -10,14 +10,15 @@ import './../styles/likedGifs.scss';
 function LikedGifs() {
   const [likedGifsArr, setLikedGifsArr] = useState(() => store.getState());
 
+  //Redux effect to track updated liked Gifs
   useEffect(() => {
     const unsubscribe = store.subscribe(() =>
       setLikedGifsArr(store.getState())
     );
-
     return () => unsubscribe();
   }, [likedGifsArr]);
 
+  // Ternary variable to calculate number of liked gifs needed to display weirdness score
   const countdown = likedGifsArr.likedList
     ? 5 - likedGifsArr.likedList.length
     : 5;
@@ -27,6 +28,7 @@ function LikedGifs() {
       <div className="liked-gifs-container__headline">YOUR LIKED GIFS</div>
       <div className="liked-gifs-box">
         {likedGifsArr.likedList.map((e, i) => {
+          //conditional to limit the number of liked gifs displayed to four
           if (i <= 3) {
             return (
               <div key={i} className="inner-gifs-box">

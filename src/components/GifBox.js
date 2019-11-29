@@ -5,8 +5,8 @@ export default function GifBox(props) {
   return (
     <div className="search-result-text-box">
       <div className="gif-title">
-        {' '}
-        {props.title.charAt(0).toUpperCase() + props.title.substring(1)}
+        {// Capitalizes first letter in title
+        props.title.charAt(0).toUpperCase() + props.title.substring(1)}
       </div>
       <div className="aspect-ratio">
         <img
@@ -14,7 +14,8 @@ export default function GifBox(props) {
           alt="placeholder"
           className="aspect-ratio__inside"
         />
-        {props.removeLiked ? (
+        {//Ternary to determine if remove button should be displayed on hover
+        props.removeLiked ? (
           <button className="remove-gif" onClick={props.removeLiked}>
             X
           </button>

@@ -22,15 +22,22 @@ const likedReducer = (state = initialState, action) => {
         scoreSum: state.scoreSum + action.gif.score
       });
     case REMOVE_LIKED:
+      //Filter out gif to be removed from state
       const newList = state.likedList.filter(item => {
         return item.gifObj.id !== action.id;
       });
+      //Grab the weirdness score off of the state to be removed to update the weirdness score
+      let itemScore;
+      state.likedList.forEach(item => {
+        if (item.gifObj.id === action.id) {
+          itemScore = item.score;
+        }
+      });
       return Object.assign({}, state, {
         likedList: newList,
-        scoreSum: state.scoreSum - action.id.score
+        scoreSum: state.scoreSum - itemScore
       });
     case SHOW_WEIRDNESS_SCORE:
-      console.log(action.bool);
       return Object.assign({}, state, {
         showWeirdness: action.bool
       });

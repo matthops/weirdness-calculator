@@ -4,7 +4,6 @@ export const SHOW_WEIRDNESS_SCORE = 'SHOW_WEIRDNESS_SCORE';
 export const START_OVER = 'START_OVER';
 
 export const addLiked = (gifObj, score, searchTerm) => {
-  console.log(gifObj);
   return { type: ADD_LIKED, gif: { gifObj, score, searchTerm } };
 };
 

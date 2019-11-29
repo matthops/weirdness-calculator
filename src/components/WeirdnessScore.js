@@ -28,11 +28,10 @@ function WeirdnessScore() {
       <div className="weirdness-gif-container">
         {totalGifs.map((e, i) => {
           return (
-            <div className="inner-gifs-box">
+            <div key={i} className="inner-gifs-box">
               <GifBox
                 url={e.gifObj.images.original.url}
                 title={e.gifObj.title}
-                key={i}
               />
             </div>
           );
