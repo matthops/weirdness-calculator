@@ -3,6 +3,7 @@ import { IconButton } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { connect } from 'react-redux';
 import GifBox from './GifBox';
+import Loading from './Loading';
 import './../styles/searchResult.scss';
 
 function SearchResult(props) {
@@ -25,10 +26,12 @@ function SearchResult(props) {
         <div className="inner-search-container empty">
           <div className="aspect-ratio">
             <div className="aspect-ratio__inside">
-              {props.errorMessage === null
-                ? `To look for a gif, enter a term in the search box above, and set the weirdness
-              below.`
-                : props.errorMessage}
+              {props.errorMessage !== null
+                ? props.errorMessage
+                : props.isLoading === true
+                ? 'Loading...'
+                : `To look for a gif, enter a term in the search box above, and set the weirdness
+              below.`}
             </div>
           </div>
         </div>

@@ -5,13 +5,15 @@ import Slider from '@material-ui/core/Slider';
 import store from './../reducers/likedReducer';
 import { addLiked } from './../actions/actions';
 import { Typography, InputLabel, TextField } from '@material-ui/core';
-import Loading from './Loading';
 import './../styles/search.scss';
 
 export default function Search() {
   const [inputVal, setInputVal] = useState('');
   const [giphyResult, setGiphyResult] = useState(null);
+  //weirdness is set by the slider
   const [weirdness, setWeirdness] = useState(0);
+  //searchedWeirdness is the weirdness score that was used in the Giphy API search and needs to be separate so the score that is submitted when a gif is liked is accurate, since the user can change the weirdness score for additional searches
+  const [searchedWeirdness, setSearchedWeirdness] = useState(0);
   const [searchTerms, setSearchTerms] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +29,12 @@ export default function Search() {
   // function to retrieve search results from the Giphy API Translate endpoint, with weirdness param included. This will return a single data object.
   const handleSearch = e => {
     e.preventDefault();
-    debugger;
     let isSearchable = true;
     let usedTerm;
+    setGiphyResult(null);
+    setIsLoading(true);
     setErrorMessage(null);
+    setSearchedWeirdness(weirdness);
     // checking to see if search term is a duplicate
     searchTerms.forEach(term => {
       if (term.toLowerCase() === inputVal.toLowerCase()) {
@@ -42,14 +46,23 @@ export default function Search() {
       }
     });
 
+    const updateSearchResult = e => {
+      setIsLoading(false);
+      setGiphyResult(e.data.data);
+    };
+
     isSearchable
       ? axios
           .get(
-            `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&weirdness=${weirdness}&s=${inputVal}`
+            `https://api.giphy.com/v1/gifs/translate?api_key=nmFzmNm0JGwZCNIrWe74T0YTXMt1snmz&weirdness=${weirdness}&s=${inputVal.replace(
+              ' ',
+              '+'
+            )}`
           )
           .then(e => {
+            debugger;
             return e.data.data.id
-              ? setGiphyResult(e.data.data) && setIsLoading(true)
+              ? updateSearchResult(e)
               : setErrorMessage(
                   `There are no results for this term. Please enter a new term and hit search`
                 );
@@ -66,7 +79,7 @@ export default function Search() {
   };
 
   const handleAddToLikedGifs = () => {
-    store.dispatch(addLiked(giphyResult, weirdness, inputVal));
+    store.dispatch(addLiked(giphyResult, searchedWeirdness, inputVal));
     setInputVal('');
     setGiphyResult(null);
   };
@@ -107,18 +120,14 @@ export default function Search() {
         </form>
       </div>
       <div>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <SearchResult
-            // passes url for gif from giphy response object, passes null if search hasn't been performed yet.
-            gifSrc={giphyResult ? giphyResult.images.original.url : null}
-            title={giphyResult ? giphyResult.title : null}
-            addToLikedGifs={handleAddToLikedGifs}
-            errorMessage={errorMessage}
-          />
-        )}
-
+        <SearchResult
+          // passes url for gif from giphy response object, passes null if search hasn't been performed yet.
+          gifSrc={giphyResult ? giphyResult.images.original.url : null}
+          title={giphyResult ? giphyResult.title : null}
+          addToLikedGifs={handleAddToLikedGifs}
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
         <div className="weirdness-slider">
           <Slider
             value={weirdness}
