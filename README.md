@@ -4,7 +4,7 @@ This app uses the Giphy API to show users several GIFs that range from 0-10 on G
 
 ### Starting the App
 
-'npm start' or 'yarn start' runs the app in the development mode.<br />
+After installing all dependencies with 'npm install' or 'yarn install', 'npm start' or 'yarn start' runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
